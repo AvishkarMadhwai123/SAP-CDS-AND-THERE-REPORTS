@@ -1,0 +1,7 @@
+start-of-selection.
+
+  select * from Z_para_cds( P_NAME = 'TCS PVT LTD' ) into table @data(lt_purchase).
+
+  if sy-SUBRC is initial.
+    cl_demo_output=>display( lt_purchase ).
+  endif.
