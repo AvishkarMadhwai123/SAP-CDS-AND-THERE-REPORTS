@@ -1,0 +1,28 @@
+@AbapCatalog.sqlViewName: 'ZMARA_VIEW'
+@AbapCatalog.compiler.compareFilter: true
+@AbapCatalog.preserveKey: true
+@AccessControl.authorizationCheck: #NOT_REQUIRED
+@EndUserText.label: 'avishkar cds'
+@Metadata.ignorePropagatedAnnotations: true
+define view zavi_cds as select from mara as a
+  inner join makt as b
+    on a.matnr = b.matnr
+  inner join mard as c
+    on c.matnr = a.matnr
+{
+  @EndUserText.label: 'Material Information'
+  @EndUserText.quickInfo: 'Material Information Number'
+  key a.matnr as Matnr,
+
+  @EndUserText.label: 'Created Date'
+  @EndUserText.quickInfo: 'Material Created Date'
+  a.ersda as Ersda,
+
+  a.ernam as Ernam,
+  a.laeda as Laeda,
+  a.aenam as Aenam,
+  b.maktx as maktx,
+  c.werks as werks,
+  c.lgort as lgort
+}
+where c.werks = '1810'
