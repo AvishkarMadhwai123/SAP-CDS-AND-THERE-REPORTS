@@ -1,0 +1,30 @@
+@AbapCatalog.sqlViewName: 'ZPARA_VIEW'
+@AbapCatalog.compiler.compareFilter: true
+@AbapCatalog.preserveKey: true
+@AccessControl.authorizationCheck: #NOT_REQUIRED
+@EndUserText.label: 'Parametrize cds'
+@Metadata.ignorePropagatedAnnotations: true
+define view Z_para_cds with parameters p_name : name1_gp
+
+as select from ekko as a
+inner join ekpo as b
+on b.ebeln = a.ebeln
+
+left outer join mseg as c
+on c.ebeln = b.ebeln
+and c.ebelp = b.ebelp
+
+left outer join lfa1 as d
+on d.lifnr = a.lifnr
+
+{
+        key a.ebeln,
+        key b.ebelp,
+       @EndUserText.label : 'Vendor name '
+       d.name1,
+       
+       @EndUserText.label : 'custome material '
+       b.matnr,
+       c.mblnr
+          
+}where d.name1 = :p_name
