@@ -1,0 +1,17 @@
+*&---------------------------------------------------------------------*
+*& Report Z_CDS_REPORT3
+*&---------------------------------------------------------------------*
+*& Display data from CDS view ZCDS_3
+*&---------------------------------------------------------------------*
+REPORT z_cds_report3.
+
+
+SELECT *
+  FROM zcds_3
+  INTO TABLE @DATA(it_material_det).
+
+IF it_material_det IS NOT INITIAL.
+  cl_demo_output=>display( it_material_det ).
+ELSE.
+  WRITE: / 'No data found.'.
+ENDIF.
